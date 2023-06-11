@@ -1,9 +1,18 @@
 import React from 'react'
+import memesData from '../data/memesData'
 
 export default function Meme() {
+
+    const [memeImg,setMemeImg]=React.useState('')
+
+    function generateRandomMeme(){
+        const memesArray=memesData.data.memes
+        const n=Math.floor(Math.random() * memesArray.length);
+        setMemeImg(memesArray[n].url)
+    }
   return (
     <main>
-        <form className='form'>
+        <div className='form'>
             <input 
                 type='text'
                 className='form-input'
@@ -16,8 +25,10 @@ export default function Meme() {
             />
             <button
                 className='btn-form'
+                onClick={generateRandomMeme}
             >Create Meme</button>
-        </form>
+        </div>
+        <img src={memeImg} className='meme-image'/>
     </main>
   )
 }
